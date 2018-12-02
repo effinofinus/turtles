@@ -1,14 +1,19 @@
 pipeline {
   environment {
-    registry = "effinofinus/turtles"
-    registryCredential = 'dockerhub'
+    registry = "effinofinus/turtles”
+    registryCredential = ‘dockerhub’
   }
   agent any
   stages {
-    stage('Building image') {
+    stage(‘Cloning Git’) {
+      steps {
+        git ‘hhttps://github.com/effinofinus/turtles.git'
+      }
+    }
+    stage(‘Building image’) {
       steps{
         script {
-          docker.build registry + ":$BUILD_NUMBER"
+          docker.build registry + “:$BUILD_NUMBER”
         }
       }
     }
