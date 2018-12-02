@@ -51,6 +51,7 @@ pipeline {
                         }
                         sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$stage_ip \"docker run --restart always --name turtles -p 80:80 -d effinofinus/turtles:${env.BUILD_NUMBER}\""
                     }
+                echo '@stage_ip'
                 }
             }
         }
@@ -72,6 +73,7 @@ pipeline {
                         }
                         sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$prod_ip \"docker run --restart always --name turtles -p 80:80 -d effinofinus/turtles:${env.BUILD_NUMBER}\""
                     }
+                echo '@prod_ip'
                 }
             }
         }
