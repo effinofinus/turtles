@@ -1,5 +1,6 @@
 pipeline {
     agent any
+    triggers { pollSCM('H */4 * * 1-5') }
     stages {
         stage('Build') {
             steps {
@@ -38,7 +39,7 @@ pipeline {
             }
             steps {
                 input 'Deploy to Production?'
-            //    milestone(1)
+                milestone(1)
                 withCredentials([usernamePassword(credentialsId: 'webserver_login', usernameVariable: 'USERNAME', passwordVariable: 'USERPASS')]) {
                     script {
                         sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$prod_ip \"docker pull effinofinus/turtles:${env.BUILD_NUMBER}\""
