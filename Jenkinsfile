@@ -1,12 +1,16 @@
 pipeline {
-    agent any
-    stages {
-        stage('Deploy') {
-            steps {
-                echo 'Deploying new version'
-                sh 'git pull https://github.com/effinofinus/turtles.git'
-                sh './refresh.sh'
-            }
+  environment {
+    registry = "effinofinus/turtles"
+    registryCredential = 'dockerhub'
+  }
+  agent any
+  stages {
+    stage('Building image') {
+      steps{
+        script {
+          docker.build registry + ":$BUILD_NUMBER"
         }
+      }
     }
+  }
 }
