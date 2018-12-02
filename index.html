@@ -5,7 +5,10 @@
     <title>Turtles</title>
   </head>
   <body>
-    <p><!--#echo var="SERVER_NAME"--></p>
+    <script src="env.js"></script>
+      <script>
+      console.log(env.USER +'@'+ env.HOSTNAME);
+      </script>
     <h1>Turtles</h1>
     <p>I like Turtles</p>
     <img src="images/turtle.jpg" alt="turtle pic">
