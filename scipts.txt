@@ -1,0 +1,16 @@
+docker run --name myjenkins -p 8080:8080 -p 50000:50000 -v /home/jenkins jenkins  --restart unless-stopped
+
+docker run --name nagios4  \
+  -v /home/nagios/etc/:/opt/nagios/etc/ \
+  -v /home/nagios/var:/opt/nagios/var/ \
+  -v /home/nagios/custom-plugins:/opt/Custom-Nagios-Plugins \
+  -v /home/nagios/nagiosgraph-var:/opt/nagiosgraph/var \
+  -v /home/nagios/nagiosgraph-etc:/opt/nagiosgraph/etc \
+  -p 0.0.0.0:8081:80 jasonrivers/nagios:latest
+
+  docker run -dit --name my-apache-app -p 80:80\
+   -v /home/httpd/:/usr/local/apache2/htdocs/ httpd:2.4
+
+
+   docker volume create portainer_data
+   docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer
